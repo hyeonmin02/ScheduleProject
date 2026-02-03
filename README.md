@@ -1,5 +1,5 @@
-# ScheduleProject
-## 📌 일정(Schedule) API 명세
+# 📅 ScheduleProject (일정관리 앱 만들기)
+## 📝 일정(Schedule) API 명세
 
 | Method | 기능            | Endpoint           | 상태 코드 |
 |--------|-----------------|--------------------|-----------|
@@ -11,7 +11,7 @@
 
 ---
 
-## 1️⃣ 일정 생성
+## 1️⃣ 일정 생성 ➕
 
 ### ▶ Request
 **POST** `/schedules`
@@ -34,7 +34,7 @@
   "modifiedAt": "2026-02-03T10:00:00"
 }
 ```
-## 2️⃣ 선택 일정 조회
+## 2️⃣ 선택 일정 조회 🔍
 ### ▶ Request
 **GET** `/schedules/{id}`
 
@@ -49,7 +49,7 @@
   "modifiedAt": "2026-02-03T10:00:00"
 }
 ```
-## 3️⃣ 전체 일정 조회
+## 3️⃣ 전체 일정 조회 🔍 
 ### ▶ Request 
 **GET** `/schedules`
 
@@ -74,7 +74,7 @@
   }
 ]
 ```
-## 4️⃣ 일정 수정
+## 4️⃣ 일정 수정 ✏️
 ### ▶ Request
 **PUT** `/schedules/{id}`
 ```json
@@ -96,7 +96,7 @@
   "modifiedAt": "2026-02-05T14:30:00"
 }
 ```
-## 5️⃣ 일정 삭제
+## 5️⃣ 일정 삭제 🗑️
 ### ▶ Request 
 **DELETE** `/schedules/{id}`
 
