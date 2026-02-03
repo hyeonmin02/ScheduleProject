@@ -2,11 +2,15 @@ package com.calendar.service;
 
 import com.calendar.dto.CreateScheduleRequest;
 import com.calendar.dto.CreateScheduleResponse;
+import com.calendar.dto.GetScheduleResponse;
 import com.calendar.entity.Schedule;
 import com.calendar.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -31,6 +35,39 @@ public class ScheduleService {
                 savedSchedule.getCreatedAt(),
                 savedSchedule.getModifiedAt()
         );
+    }
 
+    @Transactional(readOnly = true)
+    public List<GetScheduleResponse> findAll() {
+        List<Schedule> schedules = scheduleRepository.findAll();
+
+        List<GetScheduleResponse> dtos = new ArrayList<>();
+        for (Schedule schedule : schedules) {
+            GetScheduleResponse dto = new GetScheduleResponse(
+                    schedule.getId(),
+                    schedule.getTitle(),
+                    schedule.getContent(),
+                    schedule.getWriter(),
+                    schedule.getCreatedAt(),
+                    schedule.getModifiedAt()
+            );
+            dtos.add(dto);
+        }
+        return dtos;
+
+    }
+
+    @Transactional(readOnly = true)
+    public GetScheduleResponse findOne(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new IllegalStateException("없는 영화입니다."));
+        return new GetScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContent(),
+                schedule.getWriter(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
+        );
     }
 }
