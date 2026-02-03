@@ -1,8 +1,6 @@
 package com.calendar.service;
 
-import com.calendar.dto.CreateScheduleRequest;
-import com.calendar.dto.CreateScheduleResponse;
-import com.calendar.dto.GetScheduleResponse;
+import com.calendar.dto.*;
 import com.calendar.entity.Schedule;
 import com.calendar.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -60,8 +58,26 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public GetScheduleResponse findOne(Long scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId)
-                .orElseThrow(() -> new IllegalStateException("없는 영화입니다."));
+                .orElseThrow(() -> new IllegalStateException("없는 일정입니다."));
         return new GetScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContent(),
+                schedule.getWriter(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
+        );
+    }
+
+    public UpdateScheduleResponse updateSchedule(Long scheduleId, UpdateScheduleRequest request) {
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new IllegalStateException("없는 일정입니다."));
+
+        schedule.updateSchedule( // TODO 요청 시 비밀번호 함께 전달인데 비밀번호 틀렸을 시 예외처리? 요구수정내용 제외한 값을 수정할 시 예외처리
+                request.getTitle(), // 과제의 요구사항 : 일정제목, 작성자명만 수정가능
+                request.getWriter()
+        );//TODO 과제 요구사항에 일정 제목, 작성자명만 수정가능하고 비밀번호를 제외한다른 내용은 응답으로 받지않으면 안된단 말이 없는데 보통은 id만 보여주는게 맞는건가여?
+        return new UpdateScheduleResponse( // 응답을 다시 Controller로 돌려줌
                 schedule.getId(),
                 schedule.getTitle(),
                 schedule.getContent(),

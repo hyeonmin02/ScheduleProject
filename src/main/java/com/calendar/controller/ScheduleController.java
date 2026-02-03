@@ -1,9 +1,7 @@
 package com.calendar.controller;
 
-import com.calendar.dto.CreateScheduleRequest;
-import com.calendar.dto.CreateScheduleResponse;
+import com.calendar.dto.*;
 
-import com.calendar.dto.GetScheduleResponse;
 import com.calendar.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,5 +28,12 @@ public class ScheduleController {
     @GetMapping("/schedules/{scheduleId}") // 선택 일정 조회
     public ResponseEntity<GetScheduleResponse> getScheduleOne(@PathVariable Long scheduleId) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findOne(scheduleId));
+    }
+
+    @PutMapping("/schedules/{scheduleId}") // 선택한 일정 수정
+    public ResponseEntity<UpdateScheduleResponse> updateScheduleOne
+            (@PathVariable Long scheduleId,
+             @RequestBody UpdateScheduleRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.updateSchedule(scheduleId,request));
     }
 }
