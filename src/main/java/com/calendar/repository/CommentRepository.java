@@ -3,5 +3,9 @@ package com.calendar.repository;
 import com.calendar.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CommetRepository extends JpaRepository<Comment, Long> {
+import java.util.List;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+    long countByScheduleId(Long scheduleId);
+    List<Comment> findAllByScheduleIdOrderByCreatedAtAsc(Long scheduleId);
 }

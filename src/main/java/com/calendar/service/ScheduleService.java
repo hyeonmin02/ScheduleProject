@@ -1,6 +1,9 @@
 package com.calendar.service;
 
-import com.calendar.dto.*;
+import com.calendar.commentdto.GetCommentResponse;
+import com.calendar.entity.Comment;
+import com.calendar.repository.CommentRepository;
+import com.calendar.scheduledto.*;
 import com.calendar.entity.Schedule;
 import com.calendar.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
+    private final CommentRepository commentRepository;
 
     // 일정 생성 메서드
     public CreateScheduleResponse createSchedule(CreateScheduleRequest request) {
@@ -24,9 +28,8 @@ public class ScheduleService {
                 request.getWriter(),
                 request.getPassword()
         );
-        System.out.println(schedule.getId());
+
         Schedule savedSchedule = scheduleRepository.save(schedule);
-        System.out.println(savedSchedule.getId());
 
         return new CreateScheduleResponse(
                 savedSchedule.getId(),
@@ -49,7 +52,7 @@ public class ScheduleService {
         } else {
             schedules = scheduleRepository.findByWriterOrderByModifiedAtDesc(writer);
         }
-        // Schedule(엔티티) 목록을 GetScheduleResponse(DTO) 목록으로 바꾸기
+        // Schedule(엔티티) 목록을 GetScheduleInCommentResponse(DTO) 목록으로 바꾸기
         List<GetScheduleResponse> dtos = new ArrayList<>();
 
         for (Schedule schedule : schedules) {
@@ -68,16 +71,32 @@ public class ScheduleService {
 
     // 선택 일정 조회 메서드
     @Transactional(readOnly = true)
-    public GetScheduleResponse getSchedule(Long scheduleId) {
+    public GetScheduleInCommentResponse getSchedule(Long scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new IllegalStateException("없는 일정입니다."));
-        return new GetScheduleResponse(
+
+        List<Comment> comments = commentRepository.findAllByScheduleIdOrderByCreatedAtAsc(scheduleId);
+
+        List<GetCommentResponse> commentResponses = new ArrayList<>();
+        for (Comment comment : comments) {
+            GetCommentResponse response = new GetCommentResponse(
+                    comment.getId(),
+                    scheduleId,
+                    comment.getContent(),
+                    comment.getWriter(),
+                    comment.getCreatedAt(),
+                    comment.getModifiedAt()
+            );
+            commentResponses.add(response);
+        }
+        return new GetScheduleInCommentResponse(
                 schedule.getId(),
                 schedule.getTitle(),
                 schedule.getContent(),
                 schedule.getWriter(),
                 schedule.getCreatedAt(),
-                schedule.getModifiedAt()
+                schedule.getModifiedAt(),
+                commentResponses
         );
     }
 
