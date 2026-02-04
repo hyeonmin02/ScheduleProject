@@ -7,22 +7,30 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "commets")
+@Table(name = "comments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Commet extends BaseEntity {
+public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private String content;
-    private String writer;
-    private String password;
-    private Long scheduleId;
-}
+    private Long id;
 
-public Cot(String content, String writer, String password, Long scheduleId) {
-            this.content = content,
-            this.writer = writer,
-            this.password = password,
-            this.scheduleId = scheduleId;
+    private Long scheduleId;
+
+    @Column(nullable = false, length = 100)
+    private String content;
+
+    @Column(nullable = false)
+    private String writer;
+
+    @Column(nullable = false)
+    private String password;
+
+
+    public Comment(Long scheduleId, String content, String writer, String password) {
+        this.scheduleId = scheduleId;
+        this.content = content;
+        this.writer = writer;
+        this.password = password;
+
+    }
 }
-public void
