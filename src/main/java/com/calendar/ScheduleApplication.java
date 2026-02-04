@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableJpaAuditing //JPA Auditing 활용
 
-public class CalendarApplication {
+public class ScheduleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CalendarApplication.class, args);
+        SpringApplication.run(ScheduleApplication.class, args);
     }
 
 }
