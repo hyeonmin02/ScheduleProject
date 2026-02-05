@@ -10,67 +10,90 @@
 | DELETE | 일정 삭제        | `/schedules/{id}`  | 204 NO CONTENT |
 
 ---
+```mermaid
+erDiagram
+    SCHEDULE ||--o{ COMMENT : has
 
+    SCHEDULE {
+        BIGINT id PK
+        VARCHAR(30) title 
+        VARCHAR(200) content
+        VARCHAR writer
+        VARCHAR password
+        DATETIME createdAt
+        DATETIME modifiedAt
+    }
+
+    COMMENT {
+        BIGINT id PK
+        BIGINT schedule_id "FK 역할 (연관관계 매핑 없이 Long 관리)"
+        VARCHAR(100) content
+        VARCHAR writer
+        VARCHAR password
+        DATETIME createdAt
+        DATETIME modifiedAt
+    }
+```
 ## 1️⃣ 일정 생성 ➕
 
 ### ▶ Request
 **POST** `/schedules`
 ```json
 {
-  "title": "일정 제목",
-  "content": "일정 내용",
-  "writer": "작성자명",
-  "password": "비밀번호"
+  "title": "금요일",
+  "content": "내일은 주말이야",
+  "writer": "신현민",
+  "password": "12345678"
 }
 ```
-### ▶ Response
+### ▶ Response (201 CREATED)
 ```json
 {
   "id": 1,
-  "title": "일정 제목",
-  "content": "일정 내용",
-  "writer": "작성자명",
-  "createdAt": "2026-02-03T10:00:00",
-  "modifiedAt": "2026-02-03T10:00:00"
+  "title": "금요일",
+  "content": "내일은 주말이야",
+  "writer": "신현민",
+  "createdAt": "2026-02-05T10:00:00",
+  "modifiedAt": "2026-02-05T10:00:00"
 }
 ```
 ## 2️⃣ 선택 일정 조회 🔍
 ### ▶ Request
 **GET** `/schedules/{id}`
 
-### ▶ Response
+### ▶ Response (200 OK)
 ```json
 {
   "id": 1,
-  "title": "일정 제목",
-  "content": "일정 내용",
-  "writer": "작성자명",
-  "createdAt": "2026-02-03T10:00:00",
-  "modifiedAt": "2026-02-03T10:00:00"
+  "title": "금요일",
+  "content": "내일은 주말이야",
+  "writer": "신현민",
+  "createdAt": "2026-02-05T10:00:00",
+  "modifiedAt": "2026-02-05T10:00:00"
 }
 ```
 ## 3️⃣ 전체 일정 조회 🔍 
 ### ▶ Request 
 **GET** `/schedules`
 
-### ▶ Response 
+### ▶ Response (200 OK)
 ```json
 [
   {
     "id": 1,
-    "title": "첫 번째 일정",
-    "content": "내용 1",
-    "writer": "작성자1",
-    "createdAt": "2026-02-03T10:00:00",
-    "modifiedAt": "2026-02-03T10:00:00"
+    "title": "금요일",
+    "content": "내일은 주말이야",
+    "writer": "신현민",
+    "createdAt": "2026-02-05T10:00:00",
+    "modifiedAt": "2026-02-05T10:00:00"
   },
   {
     "id": 2,
-    "title": "두 번째 일정",
-    "content": "내용 2",
-    "writer": "작성자2",
-    "createdAt": "2026-02-04T11:00:00",
-    "modifiedAt": "2026-02-04T11:00:00"
+    "title": "월요일",
+    "content": "다시 공부해야겠지?",
+    "writer": "신현민",
+    "createdAt": "2026-02-05T11:00:00",
+    "modifiedAt": "2026-02-05T11:00:00"
   }
 ]
 ```
@@ -79,27 +102,30 @@
 **PUT** `/schedules/{id}`
 ```json
 {
-  "title": "수정된 일정 제목",
-  "content": "수정된 일정 내용",
-  "writer": "작성자명",
-  "password": "비밀번호"
+  "title": "월요일",
+  "content": "월요일 좋아",
+  "writer": "신현민",
+  "password": "12345678"
 }
 ```
-### ▶ Response
+### ▶ Response (200 OK)
 ```json
 {
   "id": 1,
-  "title": "수정된 일정 제목",
-  "content": "수정된 일정 내용",
-  "writer": "작성자명",
-  "createdAt": "2026-02-03T10:00:00",
+  "title": "월요일",
+  "content": "월요일 좋아",
+  "writer": "신현민",
+  "createdAt": "2026-02-05T10:00:00",
   "modifiedAt": "2026-02-05T14:30:00"
 }
 ```
 ## 5️⃣ 일정 삭제 🗑️
 ### ▶ Request 
 **DELETE** `/schedules/{id}`
-
-
+```json
+{
+ "password":"1234678"
+}
+```
 ### ▶ Response 
 **(204 NO CONTENT)**
