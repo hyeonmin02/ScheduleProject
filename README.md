@@ -142,10 +142,10 @@ API응답 비밀번호 제외
 ### ▶ Response (200 OK)
 ```json
 {
-  "id": 1,
+  "id": 2,
   "title": "월요일",
-  "content": "월요일 좋아",
-  "writer": "신현민",
+  "content": "다시 공부해야겠지?",
+  "writer": "스폰지밥",
   "createdAt": "2026-02-05T10:00:00",
   "modifiedAt": "2026-02-05T14:30:00"
 }
