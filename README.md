@@ -1,15 +1,7 @@
 # 📅 ScheduleProject (일정관리 앱 만들기)
-## 📝 일정(Schedule) API 명세
-
-| Method | 기능            | Endpoint           | 상태 코드 |
-|--------|-----------------|--------------------|-----------|
-| POST   | 일정 생성        | `/schedules`       | 201 CREATED |
-| GET    | 선택 일정 조회   | `/schedules/{id}`  | 200 OK |
-| GET    | 전체 일정 조회   | `/schedules`       | 200 OK |
-| PUT    | 일정 수정        | `/schedules/{id}`  | 200 OK |
-| DELETE | 일정 삭제        | `/schedules/{id}`  | 204 NO CONTENT |
 
 ---
+## ERD
 ```mermaid
 erDiagram
     SCHEDULE ||--o{ COMMENT : has
@@ -34,6 +26,26 @@ erDiagram
         DATETIME modifiedAt
     }
 ```
+---
+## 📝 일정(Schedule) API 명세
+| Method | 기능            | Endpoint           | 상태 코드 |
+|--------|-----------------|--------------------|-----------|
+| POST   | 일정 생성        | `/schedules`       | 201 CREATED |
+| GET    | 선택 일정 조회   | `/schedules/{id}`  | 200 OK |
+| GET    | 전체 일정 조회   | `/schedules`       | 200 OK |
+| PUT    | 일정 수정        | `/schedules/{id}`  | 200 OK |
+| DELETE | 일정 삭제        | `/schedules/{id}`  | 204 NO CONTENT |
+---
+## 공통 예외 상태 코드
+| 상태 코드                         | 상황                                                       |
+| ----------------------------- | -------------------------------------------------------- |
+| **400 BAD REQUEST**           | 요청 값이 올바르지 않은 경우<br/>- 필수 값 누락<br/>- 빈 문자열 또는 잘못된 형식의 입력 |
+| **401 UNAUTHORIZED**          | 일정 수정 또는 삭제 시 비밀번호가 일치하지 않는 경우                           |
+| **404 NOT FOUND**             | 요청한 일정(`id`)이 존재하지 않는 경우                                 |
+| **405 METHOD NOT ALLOWED**    | PATCH인데 PUT Http메서드로 요청한 경우                                 |
+| **500 INTERNAL SERVER ERROR** | 서버 내부 오류 발생                                              |
+
+
 ## 1️⃣ 일정 생성 ➕
 **POST** `/schedules`
 
