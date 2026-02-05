@@ -103,8 +103,7 @@ erDiagram
 ```json
 {
   "title": "월요일",
-  "content": "월요일 좋아",
-  "writer": "신현민",
+  "writer": "스폰지밥",
   "password": "12345678"
 }
 ```
