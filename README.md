@@ -33,7 +33,7 @@ erDiagram
 | POST   | 일정 생성        | `/schedules`       | 201 CREATED |
 | GET    | 선택 일정 조회   | `/schedules/{id}`  | 200 OK |
 | GET    | 전체 일정 조회   | `/schedules`       | 200 OK |
-| PUT    | 일정 수정        | `/schedules/{id}`  | 200 OK |
+| PATCH    | 일정 수정        | `/schedules/{id}`  | 200 OK |
 | DELETE | 일정 삭제        | `/schedules/{id}`  | 204 NO CONTENT |
 ---
 ## 공통 예외 상태 코드
@@ -135,7 +135,7 @@ API응답 비밀번호 제외
 ]
 ```
 ## 4️⃣ 일정 수정 ✏️
-**PUT** `/schedules/{id}`
+**PATCH** `/schedules/{id}`
 
 선택한 일정 내용 중 일정 제목, 작성자명만 수정 가능
 
