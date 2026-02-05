@@ -35,9 +35,8 @@ erDiagram
     }
 ```
 ## 1️⃣ 일정 생성 ➕
-
-### ▶ Request
 **POST** `/schedules`
+### ▶ Request
 ```json
 {
   "title": "금요일",
@@ -58,7 +57,6 @@ erDiagram
 }
 ```
 ## 2️⃣ 선택 일정 조회 🔍
-### ▶ Request
 **GET** `/schedules/{id}`
 
 ### ▶ Response (200 OK)
@@ -73,7 +71,6 @@ erDiagram
 }
 ```
 ## 3️⃣ 전체 일정 조회 🔍 
-### ▶ Request 
 **GET** `/schedules`
 
 ### ▶ Response (200 OK)
@@ -98,8 +95,8 @@ erDiagram
 ]
 ```
 ## 4️⃣ 일정 수정 ✏️
-### ▶ Request
 **PUT** `/schedules/{id}`
+### ▶ Request
 ```json
 {
   "title": "월요일",
@@ -119,8 +116,8 @@ erDiagram
 }
 ```
 ## 5️⃣ 일정 삭제 🗑️
-### ▶ Request 
 **DELETE** `/schedules/{id}`
+### ▶ Request 
 ```json
 {
  "password":"1234678"
@@ -128,3 +125,32 @@ erDiagram
 ```
 ### ▶ Response 
 **(204 NO CONTENT)**
+
+---
+## 📝 댓글 생성 API
+| Method | 기능    | Endpoint    | 상태 코드       |
+| ------ | ----- | ----------- | ----------- |
+| POST   | 댓글 생성 | `/comments` | 201 CREATED |
+---
+## 댓글 생성 ➕
+**POST** `/comments`
+### ▶ Request
+```json
+{
+  "scheduleId": 1,
+  "content": "ㅋㅋ주말엔 알바가야지",
+  "writer": "신현민",
+  "password": "12345678"
+}
+```
+### ▶ Response(201CREATED)
+```json
+{
+  "id": 1,
+  "scheduleId": 1,
+  "content": "ㅋㅋ주말엔 알바가야지",
+  "writer": "신현민",
+  "createdAt": "2026-02-05T12:30:00",
+  "modifiedAt": "2026-02-05T12:30:00"
+}
+```
