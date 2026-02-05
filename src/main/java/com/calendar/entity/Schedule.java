@@ -34,9 +34,7 @@ public class Schedule extends BaseEntity {
     }
 
     public void updateSchedule(String title, String writer) { // 과제의 요구사항: 일정 제목, 작성자명만 수정가능하다를 수용
-        this.title = title; // TODO 비밀번호도 요청을 해야하는데 따로 포함하지않아도되나?
-//        TODO - Service 로직에서 비밀번호 일치 여부 검증 로직 추가
-
+        this.title = title;
         this.writer = writer;
     }
 }

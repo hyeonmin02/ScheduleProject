@@ -1,4 +1,4 @@
-package com.calendar.schedultedto;
+package com.calendar.scheduledto;
 
 import lombok.Getter;
 
@@ -20,7 +20,8 @@ public class CreateScheduleResponse {
             String writer,
             LocalDateTime createdAt,
             LocalDateTime modifiedAt
-    ) {
+    )
+    {
         this.id = id;
         this.title = title;
         this.content = content;

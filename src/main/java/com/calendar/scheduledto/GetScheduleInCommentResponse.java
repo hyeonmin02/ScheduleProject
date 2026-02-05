@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-public class GetScheduleResponse {
+public class GetScheduleInCommentResponse {
     private final Long id;
     private final String title;
     private final String content;
@@ -17,7 +17,7 @@ public class GetScheduleResponse {
     private final List<GetCommentResponse> commentResponses;
 
 
-    public GetScheduleResponse(
+    public GetScheduleInCommentResponse(
             Long id,
             String title,
             String content,
@@ -25,7 +25,8 @@ public class GetScheduleResponse {
             LocalDateTime createdAt,
             LocalDateTime modifiedAt,
             List<GetCommentResponse> commentResponses
-    ) {
+    )
+    {
         this.id = id;
         this.title = title;
         this.content = content;

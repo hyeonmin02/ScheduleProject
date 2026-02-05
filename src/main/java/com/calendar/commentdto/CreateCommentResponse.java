@@ -1,4 +1,4 @@
-package com.calendar.commetdto;
+package com.calendar.commentdto;
 
 import lombok.Getter;
 
@@ -13,7 +13,14 @@ public class CreateCommentResponse {
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
-    public CreateCommentResponse(Long id, Long scheduleId, String content, String writer, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public CreateCommentResponse(
+            Long id,
+            Long scheduleId,
+            String content,
+            String writer,
+            LocalDateTime createdAt,
+            LocalDateTime modifiedAt
+    ) {
         this.id = id;
         this.scheduleId = scheduleId;
         this.content = content;

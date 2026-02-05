@@ -1,4 +1,4 @@
-package com.calendar.schedultedto;
+package com.calendar.scheduledto;
 
 import lombok.Getter;
 

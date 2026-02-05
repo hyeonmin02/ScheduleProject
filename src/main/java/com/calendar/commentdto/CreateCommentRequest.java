@@ -1,4 +1,4 @@
-package com.calendar.commetdto;
+package com.calendar.commentdto;
 
 import lombok.Getter;
 

@@ -19,7 +19,9 @@ public class GetScheduleResponse {
             String content,
             String writer,
             LocalDateTime createdAt,
-            LocalDateTime modifiedAt) {
+            LocalDateTime modifiedAt
+    )
+    {
         this.id = id;
         this.title = title;
         this.content = content;
